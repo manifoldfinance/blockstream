@@ -1,14 +1,12 @@
-FROM node:6
+FROM node:14-buster-slim
+ENV NODE_ENV=production
 
-COPY package.json /app/package.json
 WORKDIR /app
+COPY package.json /app/package.json
+COPY package-lock.json /app/package-lock.json
 RUN npm install
 
 COPY tsconfig.json /app/tsconfig.json
 COPY source/ /app/source/
-COPY tests/ /app/tests/
-COPY typings/ /app/typings/
 
-RUN npm run build
-
-ENTRYPOINT [ "npm", "test" ]
+ENTRYPOINT [ "node", "--inspect=0.0.0.0", "-r", "ts-node/register", "source/index.ts" ]
