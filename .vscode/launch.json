@@ -9,7 +9,15 @@
       "request": "launch",
       "name": "Mocha Tests",
       "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
-      "args": [ "--require", "ts-node/register", "--timeout", "999999", "--recursive", "--colors", "${workspaceRoot}/tests/**/*.ts" ],
+      "args": [
+        "--require",
+        "ts-node/register",
+        "--timeout",
+        "999999",
+        "--recursive",
+        "--colors",
+        "${workspaceRoot}/tests/**/*.ts"
+      ],
       "internalConsoleOptions": "openOnSessionStart"
     }
   ]

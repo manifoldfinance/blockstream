@@ -1,0 +1,14 @@
+out/
+output/
+dist/
+build/
+docs/
+*.html
+*.css
+*.scss
+*.svg
+*.png
+typings/
+test/
+tests/
+__tests__

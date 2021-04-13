@@ -13,10 +13,7 @@
     "experimentalDecorators": true,
     "strictNullChecks": true,
     "declaration": true,
-    "lib": [ "es6", "dom" ]
+    "lib": ["es6", "dom"]
   },
-  "include": [
-    "source/**/*ts",
-    "typings/**/*.d.ts"
-  ]
+  "include": ["source/**/*ts", "typings/**/*.d.ts"]
 }
