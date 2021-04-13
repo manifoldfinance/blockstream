@@ -1,6 +1,6 @@
 {
   "name": "ethereumjs-blockstream",
-  "version": "7.1.0",
+  "version": "7.1.1",
   "private": true,
   "description": "updated fork of ethereumjs-blockstream - library to turn an unreliable remote source of Ethereum blocks into a reliable stream of blocks with removals on re-orgs and backfills on skips.",
   "main": "output/source/index.js",
