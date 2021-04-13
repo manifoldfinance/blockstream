@@ -1,5 +1,5 @@
 node_modules/
-output/
+#output/
 coverage/
 npm-debug.log
 .DS_Store
