@@ -1,0 +1,257 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>EVM BlockStream - v7.1.0</title>
+	<meta name="description" content="Documentation for EVM BlockStream - v7.1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">EVM BlockStream - v7.1.0</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>EVM BlockStream - v7.1.0</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#ethereum-blockstream" id="ethereum-blockstream" style="color: inherit; text-decoration: none;">
+					<h1>ethereum-blockstream</h1>
+				</a>
+				<blockquote>
+					<p>updated fork of ethereumjs-blockstream</p>
+				</blockquote>
+				<p>A library to turn an unreliable remote source of Ethereum blocks into a reliable
+					stream of blocks. Handles block and log removals on chain reorganization and
+				block and log backfills on skipped blocks.</p>
+				<a href="#requirements-for-supported-ethereum-node" id="requirements-for-supported-ethereum-node" style="color: inherit; text-decoration: none;">
+					<h1>Requirements for supported Ethereum node</h1>
+				</a>
+				<p>Blockstream requires support for
+					<a href="https://github.com/ethereum/EIPs/blob/master/EIPS/eip-234.md">EIP-234</a> in the
+					configured Ethereum node. EIP-234 was merged Jul 28, 2018 and implemented in
+				Geth and Parity shortly after. Versions that provide the needed functionality:</p>
+				<ul>
+					<li>Parity: v2.1.0+</li>
+					<li>geth: v1.8.13+</li>
+				</ul>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h1>Usage</h1>
+				</a>
+				<a href="#full-example" id="full-example" style="color: inherit; text-decoration: none;">
+					<h2>Full Example</h2>
+				</a>
+				<pre><code class="language-typescript"><span style="color: #6A9955">// blockRetention is how many blocks of history to keep in memory.  it defaults to 100 if not supplied</span>
+<span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">configuration</span><span style="color: #D4D4D4"> = { </span><span style="color: #9CDCFE">blockRetention:</span><span style="color: #D4D4D4"> </span><span style="color: #B5CEA8">100</span><span style="color: #D4D4D4"> };</span>
+<span style="color: #569CD6">async</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">function</span><span style="color: #D4D4D4"> </span><span style="color: #DCDCAA">getBlockByHash</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">hash</span><span style="color: #D4D4D4">: </span><span style="color: #4EC9B0">string</span><span style="color: #D4D4D4">): </span><span style="color: #4EC9B0">Promise</span><span style="color: #D4D4D4">&lt;</span><span style="color: #4EC9B0">Block</span><span style="color: #D4D4D4"> | </span><span style="color: #4EC9B0">null</span><span style="color: #D4D4D4">&gt; {</span>
+<span style="color: #D4D4D4">  </span><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">response</span><span style="color: #D4D4D4"> = </span><span style="color: #C586C0">await</span><span style="color: #D4D4D4"> </span><span style="color: #DCDCAA">fetch</span><span style="color: #D4D4D4">(</span><span style="color: #CE9178">&#039;http://localhost:8545&#039;</span><span style="color: #D4D4D4">, {</span>
+<span style="color: #D4D4D4">    </span><span style="color: #9CDCFE">method:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">&#039;POST&#039;</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">    </span><span style="color: #9CDCFE">headers:</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">new</span><span style="color: #D4D4D4"> </span><span style="color: #DCDCAA">Headers</span><span style="color: #D4D4D4">({ </span><span style="color: #CE9178">&#039;Content-Type&#039;</span><span style="color: #9CDCFE">:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">&#039;application/json&#039;</span><span style="color: #D4D4D4"> }),</span>
+<span style="color: #D4D4D4">    </span><span style="color: #9CDCFE">body:</span><span style="color: #D4D4D4"> {</span>
+<span style="color: #D4D4D4">      </span><span style="color: #9CDCFE">jsonrpc:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">&#039;2.0&#039;</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">      </span><span style="color: #9CDCFE">id:</span><span style="color: #D4D4D4"> </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">      </span><span style="color: #9CDCFE">method:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">&#039;eth_getBlockByHash&#039;</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">      </span><span style="color: #9CDCFE">params:</span><span style="color: #D4D4D4"> [</span><span style="color: #9CDCFE">hash</span><span style="color: #D4D4D4">, </span><span style="color: #569CD6">false</span><span style="color: #D4D4D4">],</span>
+<span style="color: #D4D4D4">    },</span>
+<span style="color: #D4D4D4">  });</span>
+<span style="color: #D4D4D4">  </span><span style="color: #C586C0">return</span><span style="color: #D4D4D4"> </span><span style="color: #C586C0">await</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">response</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">json</span><span style="color: #D4D4D4">();</span>
+<span style="color: #D4D4D4">}</span>
+<span style="color: #569CD6">async</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">function</span><span style="color: #D4D4D4"> </span><span style="color: #DCDCAA">getLogs</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">filterOptions</span><span style="color: #D4D4D4">: </span><span style="color: #4EC9B0">FilterOptions</span><span style="color: #D4D4D4">): </span><span style="color: #4EC9B0">Promise</span><span style="color: #D4D4D4">&lt;</span><span style="color: #4EC9B0">Log</span><span style="color: #D4D4D4">[]&gt; {</span>
+<span style="color: #D4D4D4">  </span><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">response</span><span style="color: #D4D4D4"> = </span><span style="color: #C586C0">await</span><span style="color: #D4D4D4"> </span><span style="color: #DCDCAA">fetch</span><span style="color: #D4D4D4">(</span><span style="color: #CE9178">&#039;http://localhost:8545&#039;</span><span style="color: #D4D4D4">, {</span>
+<span style="color: #D4D4D4">    </span><span style="color: #9CDCFE">method:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">&#039;POST&#039;</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">    </span><span style="color: #9CDCFE">headers:</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">new</span><span style="color: #D4D4D4"> </span><span style="color: #DCDCAA">Headers</span><span style="color: #D4D4D4">({ </span><span style="color: #CE9178">&#039;Content-Type&#039;</span><span style="color: #9CDCFE">:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">&#039;application/json&#039;</span><span style="color: #D4D4D4"> }),</span>
+<span style="color: #D4D4D4">    </span><span style="color: #9CDCFE">body:</span><span style="color: #D4D4D4"> {</span>
+<span style="color: #D4D4D4">      </span><span style="color: #9CDCFE">jsonrpc:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">&#039;2.0&#039;</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">      </span><span style="color: #9CDCFE">id:</span><span style="color: #D4D4D4"> </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">      </span><span style="color: #9CDCFE">method:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">&#039;eth_getLogs&#039;</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">      </span><span style="color: #9CDCFE">params:</span><span style="color: #D4D4D4"> [</span><span style="color: #9CDCFE">filterOptions</span><span style="color: #D4D4D4">],</span>
+<span style="color: #D4D4D4">    },</span>
+<span style="color: #D4D4D4">  });</span>
+<span style="color: #D4D4D4">  </span><span style="color: #C586C0">return</span><span style="color: #D4D4D4"> </span><span style="color: #C586C0">await</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">response</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">json</span><span style="color: #D4D4D4">();</span>
+<span style="color: #D4D4D4">}</span>
+<span style="color: #569CD6">async</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">function</span><span style="color: #D4D4D4"> </span><span style="color: #DCDCAA">getLatestBlock</span><span style="color: #D4D4D4">(): </span><span style="color: #4EC9B0">Promise</span><span style="color: #D4D4D4">&lt;</span><span style="color: #4EC9B0">Block</span><span style="color: #D4D4D4">&gt; {</span>
+<span style="color: #D4D4D4">  </span><span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">response</span><span style="color: #D4D4D4"> = </span><span style="color: #C586C0">await</span><span style="color: #D4D4D4"> </span><span style="color: #DCDCAA">fetch</span><span style="color: #D4D4D4">(</span><span style="color: #CE9178">&#039;http://localhost:8545&#039;</span><span style="color: #D4D4D4">, {</span>
+<span style="color: #D4D4D4">    </span><span style="color: #9CDCFE">method:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">&#039;POST&#039;</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">    </span><span style="color: #9CDCFE">headers:</span><span style="color: #D4D4D4"> </span><span style="color: #569CD6">new</span><span style="color: #D4D4D4"> </span><span style="color: #DCDCAA">Headers</span><span style="color: #D4D4D4">({ </span><span style="color: #CE9178">&#039;Content-Type&#039;</span><span style="color: #9CDCFE">:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">&#039;application/json&#039;</span><span style="color: #D4D4D4"> }),</span>
+<span style="color: #D4D4D4">    </span><span style="color: #9CDCFE">body:</span><span style="color: #D4D4D4"> {</span>
+<span style="color: #D4D4D4">      </span><span style="color: #9CDCFE">jsonrpc:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">&#039;2.0&#039;</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">      </span><span style="color: #9CDCFE">id:</span><span style="color: #D4D4D4"> </span><span style="color: #B5CEA8">1</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">      </span><span style="color: #9CDCFE">method:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">&#039;eth_getBlockByNumber&#039;</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">      </span><span style="color: #9CDCFE">params:</span><span style="color: #D4D4D4"> [</span><span style="color: #CE9178">&#039;latest&#039;</span><span style="color: #D4D4D4">, </span><span style="color: #569CD6">false</span><span style="color: #D4D4D4">],</span>
+<span style="color: #D4D4D4">    },</span>
+<span style="color: #D4D4D4">  });</span>
+<span style="color: #D4D4D4">  </span><span style="color: #C586C0">return</span><span style="color: #D4D4D4"> </span><span style="color: #C586C0">await</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">response</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">json</span><span style="color: #D4D4D4">();</span>
+<span style="color: #D4D4D4">}</span>
+<span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">blockAndLogStreamer</span><span style="color: #D4D4D4"> = </span><span style="color: #569CD6">new</span><span style="color: #D4D4D4"> </span><span style="color: #DCDCAA">BlockAndLogStreamer</span><span style="color: #D4D4D4">(</span>
+<span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">getBlockByHash</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">getLogs</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">configuration</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">);</span>
+<span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">onBlockAddedSubscriptionToken</span><span style="color: #D4D4D4"> = </span><span style="color: #9CDCFE">blockAndLogStreamer</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">subscribeToOnBlockAdded</span><span style="color: #D4D4D4">(</span>
+<span style="color: #D4D4D4">  (</span><span style="color: #9CDCFE">block</span><span style="color: #D4D4D4">) </span><span style="color: #569CD6">=&gt;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">console</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">log</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">block</span><span style="color: #D4D4D4">),</span>
+<span style="color: #D4D4D4">);</span>
+<span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">onLogAddedSubscriptionToken</span><span style="color: #D4D4D4"> = </span><span style="color: #9CDCFE">blockAndLogStreamer</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">subscribeToOnLogAdded</span><span style="color: #D4D4D4">(</span>
+<span style="color: #D4D4D4">  (</span><span style="color: #9CDCFE">log</span><span style="color: #D4D4D4">) </span><span style="color: #569CD6">=&gt;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">console</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">log</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">log</span><span style="color: #D4D4D4">),</span>
+<span style="color: #D4D4D4">);</span>
+<span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">onBlockRemovedSubscriptionToken</span><span style="color: #D4D4D4"> = </span><span style="color: #9CDCFE">blockAndLogStreamer</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">subscribeToOnBlockRemoved</span><span style="color: #D4D4D4">(</span>
+<span style="color: #D4D4D4">  (</span><span style="color: #9CDCFE">block</span><span style="color: #D4D4D4">) </span><span style="color: #569CD6">=&gt;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">console</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">log</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">block</span><span style="color: #D4D4D4">),</span>
+<span style="color: #D4D4D4">);</span>
+<span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">onLogRemovedSubscriptionToken</span><span style="color: #D4D4D4"> = </span><span style="color: #9CDCFE">blockAndLogStreamer</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">subscribeToOnLogRemoved</span><span style="color: #D4D4D4">(</span>
+<span style="color: #D4D4D4">  (</span><span style="color: #9CDCFE">log</span><span style="color: #D4D4D4">) </span><span style="color: #569CD6">=&gt;</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">console</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">log</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">log</span><span style="color: #D4D4D4">),</span>
+<span style="color: #D4D4D4">);</span>
+<span style="color: #569CD6">const</span><span style="color: #D4D4D4"> </span><span style="color: #4FC1FF">logFilterToken</span><span style="color: #D4D4D4"> = </span><span style="color: #9CDCFE">blockAndLogStreamer</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">addLogFilter</span><span style="color: #D4D4D4">({</span>
+<span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">address:</span><span style="color: #D4D4D4"> </span><span style="color: #CE9178">&#039;0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef&#039;</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">topics:</span><span style="color: #D4D4D4"> [</span>
+<span style="color: #D4D4D4">    </span><span style="color: #CE9178">&#039;0xbadf00dbadf00dbadf00dbadf00dbadf00dbadf00dbadf00dbadf00dbaadf00d&#039;</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">  ],</span>
+<span style="color: #D4D4D4">});</span>
+<span style="color: #9CDCFE">blockAndLogStreamer</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">reconcileNewBlock</span><span style="color: #D4D4D4">(</span><span style="color: #DCDCAA">getLatestBlock</span><span style="color: #D4D4D4">());</span>
+<span style="color: #6A9955">// you will get a callback for the block and any logs that match the filter here</span>
+<span style="color: #DCDCAA">triggerBlockMining</span><span style="color: #D4D4D4">();</span>
+<span style="color: #DCDCAA">triggerBlockMining</span><span style="color: #D4D4D4">();</span>
+<span style="color: #DCDCAA">triggerBlockMining</span><span style="color: #D4D4D4">();</span>
+<span style="color: #9CDCFE">blockAndLogStreamer</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">reconcileNewBlock</span><span style="color: #D4D4D4">(</span><span style="color: #DCDCAA">getLatestBlock</span><span style="color: #D4D4D4">());</span>
+<span style="color: #6A9955">// you will get a callback for all blocks and logs that match the filter that have been added to the chain since the previous call to reconcileNewBlock</span>
+<span style="color: #DCDCAA">triggerChainReorg</span><span style="color: #D4D4D4">();</span>
+<span style="color: #9CDCFE">blockAndLogStreamer</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">reconcileNewBlock</span><span style="color: #D4D4D4">(</span><span style="color: #DCDCAA">getLatestBlock</span><span style="color: #D4D4D4">());</span>
+<span style="color: #6A9955">// you will get a callback for block/log removals that occurred due to the chain re-org, followed by block/log additions</span>
+<span style="color: #9CDCFE">blockAndLogStreamer</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">unsubscribeFromOnBlockAdded</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">onBlockAddedSubscriptionToken</span><span style="color: #D4D4D4">);</span>
+<span style="color: #9CDCFE">blockAndLogStreamer</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">unsubscribeFromOnBlockRemoved</span><span style="color: #D4D4D4">(</span>
+<span style="color: #D4D4D4">  </span><span style="color: #9CDCFE">onBlockRemovedSubscriptionToken</span><span style="color: #D4D4D4">,</span>
+<span style="color: #D4D4D4">);</span>
+<span style="color: #9CDCFE">blockAndLogStreamer</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">unsubscribeFromOnLogAdded</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">onLogAddedSubscriptionToken</span><span style="color: #D4D4D4">);</span>
+<span style="color: #9CDCFE">blockAndLogStreamer</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">unsubscribeFromOnLogRemoved</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">onLogRemovedSubscriptionToken</span><span style="color: #D4D4D4">);</span>
+<span style="color: #9CDCFE">blockAndLogStreamer</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">removeLogFilter</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">logFilterToken</span><span style="color: #D4D4D4">);</span>
+<span style="color: #9CDCFE">console</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">log</span><span style="color: #D4D4D4">(</span><span style="color: #9CDCFE">blockAndLogStreamer</span><span style="color: #D4D4D4">.</span><span style="color: #DCDCAA">getLatestReconciledBlock</span><span style="color: #D4D4D4">());</span>
+</code></pre>
+				<a href="#signatures" id="signatures" style="color: inherit; text-decoration: none;">
+					<h2>Signatures</h2>
+				</a>
+				<p>Note: if you have a TypeScript aware editor this will all be available in the
+				tooltip</p>
+				<ul>
+					<li><a href="https://github.com/ethereumjs/ethereumjs-blockstream/blob/master/source/models/filters.ts#L1-L10">Filter/FilterOptions</a> -
+						More details at
+					<a href="https://wiki.parity.io/JSONRPC-eth-module#eth_newfilter">Parity JSON-RPC Wiki</a></li>
+					<li><a href="https://github.com/ethereumjs/ethereumjs-blockstream/blob/master/source/models/block.ts#L3-L22">Block</a> -
+						More details at
+					<a href="https://wiki.parity.io/JSONRPC-eth-module#eth_getblockbyhash">Parity JSON-RPC Wiki</a></li>
+					<li><a href="https://github.com/ethereumjs/ethereumjs-blockstream/blob/master/source/models/log.ts#L1-L10">Log</a> -
+						More details at
+					<a href="https://wiki.parity.io/JSONRPC-eth-module#eth_getfilterchanges">Parity JSON-RPC Wiki</a></li>
+				</ul>
+				<a href="#development" id="development" style="color: inherit; text-decoration: none;">
+					<h1>Development</h1>
+				</a>
+				<a href="#build" id="build" style="color: inherit; text-decoration: none;">
+					<h2>Build</h2>
+				</a>
+				<pre><code><span style="color: #9CDCFE">docker</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">build</span><span style="color: #D4D4D4"> -</span><span style="color: #9CDCFE">t</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">blockstream</span><span style="color: #D4D4D4"> .</span>
+</code></pre>
+				<p>or</p>
+				<pre><code><span style="color: #9CDCFE">npm</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">run</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">build</span>
+</code></pre>
+				<a href="#test" id="test" style="color: inherit; text-decoration: none;">
+					<h2>Test</h2>
+				</a>
+				<pre><code><span style="color: #9CDCFE">docker</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">run</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">blockstream</span>
+</code></pre>
+				<p>or</p>
+				<pre><code><span style="color: #9CDCFE">npm</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">run</span><span style="color: #D4D4D4"> </span><span style="color: #9CDCFE">test</span>
+</code></pre>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/blockandlogstreamer.html" class="tsd-kind-icon">Block<wbr>And<wbr>Log<wbr>Streamer</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/block.html" class="tsd-kind-icon">Block</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/filteroptions.html" class="tsd-kind-icon">Filter<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/log.html" class="tsd-kind-icon">Log</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/transaction.html" class="tsd-kind-icon">Transaction</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

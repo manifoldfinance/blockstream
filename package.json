@@ -11,7 +11,8 @@
     "prepublishOnly": "npm run test && npx tsc -b",
     "test": "NODE_ENV=test npx mocha --require ts-node/register tests/**/*.ts",
     "fmt": "npx prettier --config .prettierrc.json --write .",
-    "test:mocha": "npx ts-mocha tests/index.ts"
+    "test:mocha": "npx ts-mocha tests/index.ts",
+    "docs": "npx typedoc source/index.ts --highlightTheme dark-plus --name 'EVM BlockStream' --includeVersion --hideGenerator"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,7 @@
   },
   "homepage": "https://github.com/manifoldfinance/blockstream#readme",
   "devDependencies": {
-    "@types/chai": "4.1.4",
+    "@types/chai": "^4.2.16",
     "@types/chai-as-promised": "^7.1.3",
     "@types/mocha": "5.2.2",
     "@types/node": "^14.14.37",
