@@ -2,3 +2,11 @@ node_modules/
 output/
 coverage/
 npm-debug.log
+.DS_Store
+*.tgz
+*.log
+*.tar.gz
+.cache
+cache/
+build/
+dist
