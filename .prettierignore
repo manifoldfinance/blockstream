@@ -11,4 +11,4 @@ docs/
 typings/
 test/
 tests/
-__tests__
+__test__
