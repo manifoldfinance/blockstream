@@ -8,8 +8,8 @@
   "scripts": {
     "build": "npx tsc -b",
     "coverage": "nyc npm run test && nyc report --reporter=text-lcov > coverage.lcov && npx codecov",
-    "prepublishOnly": "npm run test && npx tsc -b",
-    "test": "NODE_ENV=test npx mocha --require ts-node/register tests/**/*.ts",
+    "prepublishOnly": "npx tsc -b",
+   "test": " ./node_modules/.bin/ts-mocha tests/index.ts",
     "fmt": "npx prettier --config .prettierrc.json --write .",
     "test:mocha": "npx ts-mocha tests/index.ts",
     "docs": "npx typedoc source/index.ts --highlightTheme dark-plus --name 'EVM BlockStream' --includeVersion --hideGenerator"
